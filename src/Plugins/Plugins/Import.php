@@ -5,19 +5,25 @@ use Sunset\Components\Json\Json;
 
 class Import implements PluginInterface {
 
+	private $_params;
+
 	/**
 	 * Import external json to current object
 	 *
-	 * @param mixed $input
+	 * @param array $input
+	 * @param array $parameters
 	 *
 	 * @return mixed
 	 */
-	public function run($input) {
-		foreach ((array)$input->import as $import => $value) {
-			$json = new Json();
-			$input = array_merge((array)$input, (array)$json->parse($import));
+	public function run($input, $parameters) {
+		foreach ((array)$input['import'] as $import => $value) {
+			$json = new Json($parameters);
+			$input = array_merge((array)$input, (array)$json->parse($import, $parameters));
 		}
-
-		return $input;
+		unset($input['import']);
+		return array(
+			"content" => $input,
+			"parameters" => $parameters
+		);
 	}
 }

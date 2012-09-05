@@ -1,5 +1,10 @@
 {
+	"parameters": {
+		"$username": "abdulklara",
+		"$foo": "bar"
+	},
 	"import": {
 		"/Users/patrykuss/Sites/jsonParser./tests/Resources/Fixtures/foo.json":""
-	}
+	},
+	"login": "$username"
 }

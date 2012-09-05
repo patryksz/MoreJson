@@ -6,9 +6,10 @@ interface PluginInterface {
 	/**
 	 * Run plugin process returning input
 	 *
-	 * @param mixed $input
+	 * @param array $input
+	 * @param array $parameters
 	 *
 	 * @return mixed
 	 */
-	public function run($input);
+	public function run($input, $parameters);
 }

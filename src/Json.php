@@ -42,15 +42,15 @@ class Json {
 	/**
 
 	 */
-	public function __construct() {
+	public function __construct($parameters = array()) {
 		$this->_params = array(
 			'fileName' => null,
-			'fileContentDecoded' => null,
-			'parameters' => array()
+			'content' => null,
+			'parameters' => $parameters
 		);
 
 		$this->_availablePlugins = array(
-			'params', 'import'
+			'parameters', 'import'
 		);
 	}
 
@@ -61,11 +61,10 @@ class Json {
 	 */
 	public function parse($fileName) {
 		$this->_params['fileName'] = $fileName;
-		$this->_params['fileContentDecoded'] = $this->_getFileContent();
-		$this->_includePlugins();
-		$this->_executePlugins();
+		$this->_params['content'] = $this->_getFileContent();
+		$this->_usePlugins();
 
-		return $this->_params['fileContentDecoded'];
+		return $this->_params['content'];
 	}
 
 	/**
@@ -76,7 +75,7 @@ class Json {
 	 */
 	private function _getFileContent() {
 		if (file_exists($this->_params['fileName'])) {
-			return json_decode(file_get_contents($this->_params['fileName']));
+			return json_decode(file_get_contents($this->_params['fileName']), true);
 		}
 		throw new JsonException('Can\'t find file '.$this->_params['fileName']);
 	}
@@ -84,10 +83,13 @@ class Json {
 	/**
 	 * Lets iterate and include all needed plugins
 	 */
-	private function _includePlugins() {
-		foreach ((array)$this->_params['fileContentDecoded'] as $key => $value) {
+	private function _usePlugins() {
+		foreach ((array)$this->_params['content'] as $key => $value) {
 			if (in_array(strtolower($key), $this->_availablePlugins)) {
-				$this->_plugins[] = $this->_getPlugin($key);
+				$this->_plugins[$key] = $this->_getPlugin($key);
+				$pluginReturn = $this->_plugins[$key]->run($this->_params['content'], $this->_params['parameters']);
+				$this->_params['content'] = $pluginReturn['content'];
+				$this->_params['parameters'] = $pluginReturn['parameters'];
 			}
 		}
 	}
@@ -102,14 +104,5 @@ class Json {
 	private function _getPlugin($key) {
 		$pluginNamespace = implode('\\', array('Sunset\Components\Json\Plugins\Plugins', ucfirst($key)));
 		return new $pluginNamespace();
-	}
-
-	/**
- 	 * execute plugins
-	 */
-	private function _executePlugins() {
-		foreach ((array)$this->_plugins as $plugin) {
-			$this->_params['fileContentDecoded'] = $plugin->run($this->_params['fileContentDecoded']);
-		}
 	}
 }

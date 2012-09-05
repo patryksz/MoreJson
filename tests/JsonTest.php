@@ -22,4 +22,11 @@ class JsonTest extends  \PHPUnit_Framework_TestCase {
 	public function testImport(){
 		$this->assertEquals('bar', $this->decodedJson['foo']);
 	}
+
+	/**
+ 	 * @expectedException Sunset\Components\Json\JsonException
+	 */
+	public function testUnknownFile(){
+		$this->object->parse(__DIR__."/Resources/Fixtures/non-existing.json");
+	}
 }
