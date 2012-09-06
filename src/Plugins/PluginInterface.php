@@ -1,15 +1,14 @@
 <?php
-namespace Sunset\Components\Json\Plugins;
+namespace Sunset\Components\MoreJson\Plugins;
 
 interface PluginInterface {
 
 	/**
 	 * Run plugin process returning input
 	 *
-	 * @param array $input
-	 * @param array $parameters
+	 * @param array $params
 	 *
 	 * @return mixed
 	 */
-	public function run($input, $parameters);
+	public function run($params);
 }

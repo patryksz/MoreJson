@@ -1,6 +1,6 @@
 <?php
-namespace Sunset\Components\Json\Plugins\Plugins;
-use Sunset\Components\Json\Plugins\PluginInterface;
+namespace Sunset\Components\MoreJson\Plugins\Plugins;
+use Sunset\Components\MoreJson\Plugins\PluginInterface;
 
 class Parameters implements PluginInterface {
 
@@ -14,12 +14,14 @@ class Parameters implements PluginInterface {
 	/**
 	 * Initialize parameters and include parameters in json
 	 *
-	 * @param array $input
-	 * @param array $parameters
+	 * @param array $params
 	 *
 	 * @return mixed
 	 */
-	public function run($input, $parameters) {
+	public function run($params) {
+		$input = $params['content'];
+		$parameters = $params['parameters'];
+
 		$this->_parameters = array_merge((array) $input['parameters'], $parameters);
 		array_walk_recursive($input, array($this, '_replaceParameters'));
 		$input['parameters'] = $this->_parameters;
@@ -30,6 +32,12 @@ class Parameters implements PluginInterface {
 		);
 	}
 
+	/**
+	 * If find $parameter, replace to value of this parameter
+	 *
+	 * @param string $item
+	 * @param string $key
+	 */
 	private function _replaceParameters(&$item, $key){
 		if (!empty($this->_parameters[$item])) {
 			$item = $this->_parameters[$item];

@@ -4,7 +4,7 @@
 		"$foo": "bar"
 	},
 	"import": {
-		"/Users/patrykuss/Sites/jsonParser./tests/Resources/Fixtures/foo.json":""
+		"foo.json":""
 	},
 	"login": "$username"
 }

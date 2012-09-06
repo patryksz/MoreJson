@@ -1,11 +1,11 @@
 <?php
 
-use Sunset\Components\Json\Json;
+use Sunset\Components\MoreJson\MoreJson;
 
 class JsonTest extends  \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @var Json
+	 * @var MoreJson
 	 */
 	private $object;
 
@@ -15,7 +15,7 @@ class JsonTest extends  \PHPUnit_Framework_TestCase {
 	private $decodedJson;
 
 	public function setUp(){
-		$this->object = new \Sunset\Components\Json\Json();
+		$this->object = new MoreJson();
 		$this->decodedJson = $this->object->parse(__DIR__."/Resources/Fixtures/sample.json");
 	}
 
@@ -24,7 +24,7 @@ class JsonTest extends  \PHPUnit_Framework_TestCase {
 	}
 
 	/**
- 	 * @expectedException Sunset\Components\Json\JsonException
+ 	 * @expectedException Sunset\Components\MoreJson\MoreJsonException
 	 */
 	public function testUnknownFile(){
 		$this->object->parse(__DIR__."/Resources/Fixtures/non-existing.json");
