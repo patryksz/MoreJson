@@ -10,7 +10,7 @@ class JsonTest extends  \PHPUnit_Framework_TestCase {
 	private $object;
 
 	/**
-	 * @var stdClass
+	 * @var array
 	 */
 	private $decodedJson;
 
