@@ -4,7 +4,7 @@ namespace Sunset\Components\MoreJson\Plugins;
 interface PluginInterface {
 
 	/**
-	 * Run plugin process returning input
+	 * Run plugin process
 	 *
 	 * @param array $params
 	 *

@@ -10,7 +10,7 @@
 		bootstrap="tests/bootstrap.php">
 
 	<testsuites>
-		<testsuite name="Json">
+		<testsuite name="MoreJson">
 			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
