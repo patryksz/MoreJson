@@ -2,19 +2,7 @@
 namespace Sunset\Components\MoreJson;
 
 /**
- * MoreJson parser
- * Available patterns:
- * --- variables declaration ---
- * 'parameters': {
- *         'foo': 'bar'
- * }
- * $parameter - include parameter
- * --- import external json ---
- * "import": {
- *         "file1.json",
- *         "file2.json"
- * }
-
+ * MoreJson is a simple library, which can help you including json to json and use parameters. It's great idea for configuration your system.
  */
 class MoreJson {
 

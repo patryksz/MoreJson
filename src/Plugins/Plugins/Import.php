@@ -3,9 +3,10 @@ namespace Sunset\Components\MoreJson\Plugins\Plugins;
 use Sunset\Components\MoreJson\Plugins\PluginInterface;
 use Sunset\Components\MoreJson\MoreJson;
 
+/**
+ * @package Plugins
+ */
 class Import implements PluginInterface {
-
-	private $_params;
 
 	/**
 	 * Import external json to current object

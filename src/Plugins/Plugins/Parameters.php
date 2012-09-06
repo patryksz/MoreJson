@@ -1,7 +1,9 @@
 <?php
 namespace Sunset\Components\MoreJson\Plugins\Plugins;
 use Sunset\Components\MoreJson\Plugins\PluginInterface;
-
+/**
+ * @package Plugins
+ */
 class Parameters implements PluginInterface {
 
 	/**
