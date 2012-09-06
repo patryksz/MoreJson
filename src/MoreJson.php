@@ -1,8 +1,8 @@
 <?php
-namespace Sunset\Components\Json;
+namespace Sunset\Components\MoreJson;
 
 /**
- * Json parser
+ * MoreJson parser
  * Available patterns:
  * --- variables declaration ---
  * 'parameters': {
@@ -16,7 +16,7 @@ namespace Sunset\Components\Json;
  * }
 
  */
-class Json {
+class MoreJson {
 
 	/**
 	 * Array with available plugins
@@ -44,7 +44,7 @@ class Json {
 	 */
 	public function __construct($parameters = array()) {
 		$this->_params = array(
-			'fileName' => null,
+			'path' => null,
 			'content' => null,
 			'parameters' => $parameters
 		);
@@ -60,7 +60,7 @@ class Json {
 	 * @param string $fileName
 	 */
 	public function parse($fileName) {
-		$this->_params['fileName'] = $fileName;
+		$this->_params['path'] = $fileName;
 		$this->_params['content'] = $this->_getFileContent();
 		$this->_usePlugins();
 
@@ -71,13 +71,13 @@ class Json {
 	 * Get file content
 	 *
 	 * @return string
-	 * @throws JsonException
+	 * @throws MoreJsonException
 	 */
 	private function _getFileContent() {
-		if (file_exists($this->_params['fileName'])) {
-			return json_decode(file_get_contents($this->_params['fileName']), true);
+		if (file_exists($this->_params['path'])) {
+			return json_decode(file_get_contents($this->_params['path']), true);
 		}
-		throw new JsonException('Can\'t find file '.$this->_params['fileName']);
+		throw new MoreJsonException('Can\'t find file '.$this->_params['path']);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Json {
 		foreach ((array)$this->_params['content'] as $key => $value) {
 			if (in_array(strtolower($key), $this->_availablePlugins)) {
 				$this->_plugins[$key] = $this->_getPlugin($key);
-				$pluginReturn = $this->_plugins[$key]->run($this->_params['content'], $this->_params['parameters']);
+				$pluginReturn = $this->_plugins[$key]->run($this->_params);
 				$this->_params['content'] = $pluginReturn['content'];
 				$this->_params['parameters'] = $pluginReturn['parameters'];
 			}
@@ -102,7 +102,7 @@ class Json {
 	 * @return mixed
 	 */
 	private function _getPlugin($key) {
-		$pluginNamespace = implode('\\', array('Sunset\Components\Json\Plugins\Plugins', ucfirst($key)));
+		$pluginNamespace = implode('\\', array('Sunset\Components\MoreJson\Plugins\Plugins', ucfirst($key)));
 		return new $pluginNamespace();
 	}
 }
