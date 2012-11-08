@@ -13,7 +13,7 @@ How to use?
 Using a MoreJson is very simply. Even child can do this!
 
 
-```
+```php
 <?php
 
 $moreJson = new MoreJson();
@@ -25,8 +25,8 @@ How to compose .json file?
 --------------------------
 
 Currently, MoreJson contains 2 plugins: Import and Parameters.
-*Import - usefull plugin for import one json file to another
-*Parameters - plugin for declaring the properties (variables)
+* Import - usefull plugin for import one json file to another
+* Parameters - plugin for declaring the properties (variables)
 
 file1.json:
 ```
@@ -53,7 +53,7 @@ file2.json:
 ```
 
 In output you will have:
-```
+```php
 array(4) {
   ["parameters"]=>
   array(3) {
