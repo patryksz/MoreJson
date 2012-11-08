@@ -20,3 +20,57 @@ $moreJson = new MoreJson();
 $json = $moreJson->parse("foo.json");
 ...
 ```
+
+How to compose .json file?
+--------------------------
+
+Currently, MoreJson contains 2 plugins: Import and Parameters.
+*Import - usefull plugin for import one json file to another
+*Parameters - plugin for declaring the properties (variables)
+
+file1.json:
+```
+{
+	"parameters":{
+		"$test":"test"
+	},
+	"foo": "$foo",
+	"testing": "$test"
+}
+```
+file2.json:
+```
+{
+	"parameters": {
+		"$username": "abdulklara",
+		"$foo": "bar"
+	},
+	"import": {
+		"file2.json":""
+	},
+	"login": "$username"
+}
+```
+
+In output you will have:
+```
+array(4) {
+  ["parameters"]=>
+  array(3) {
+    ["$test"]=>
+    string(4) "test"
+    ["$username"]=>
+    string(10) "abdulklara"
+    ["$foo"]=>
+    string(3) "bar"
+  }
+  ["login"]=>
+  string(10) "abdulklara"
+  ["foo"]=>
+  string(3) "bar"
+  ["testing"]=>
+  string(4) "test"
+}
+```
+
+That's it!
