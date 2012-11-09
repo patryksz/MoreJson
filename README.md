@@ -74,3 +74,7 @@ array(4) {
 ```
 
 That's it!
+
+License
+-------
+MoreJson is licensed under the MIT License
