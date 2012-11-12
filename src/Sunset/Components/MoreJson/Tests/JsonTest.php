@@ -24,7 +24,7 @@ class JsonTest extends  \PHPUnit_Framework_TestCase {
 	}
 
 	/**
- 	 * @expectedException Sunset\Components\MoreJson\MoreJsonException
+ 	 * @expectedException Sunset\Components\MoreJson\Exception\MoreJsonException
 	 */
 	public function testUnknownFile(){
 		$this->object->parse(__DIR__."/Resources/Fixtures/non-existing.json");
