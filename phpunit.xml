@@ -7,11 +7,11 @@
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
 		stopOnFailure="false"
-		bootstrap="tests/bootstrap.php">
+		bootstrap="bootstrap.php">
 
 	<testsuites>
 		<testsuite name="MoreJson">
-			<directory>tests</directory>
+			<directory>src/Components/MoreJson/Tests</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

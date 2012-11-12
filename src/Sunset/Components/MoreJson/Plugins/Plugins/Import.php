@@ -18,7 +18,7 @@ class Import implements PluginInterface {
 	public function run($params) {
 		$input = $params['content'];
 		$parameters = $params['parameters'];
-		$path = $this->_getPath($params);
+		$path = $this->getPath($params);
 
 		foreach ((array)$input['import'] as $import => $value) {
 			$importPath = implode("/", array($path, $import));
@@ -39,7 +39,7 @@ class Import implements PluginInterface {
 	 *
 	 * @return string
 	 */
-	private function _getPath($params){
+	private function getPath($params){
 		return substr($params['path'], 0, strrpos($params['path'], "/"));
 	}
 }

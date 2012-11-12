@@ -1,7 +1,7 @@
 {
 	"parameters": {
-		"$username": "abdulklara",
-		"$foo": "bar"
+		"username": "abdulklara",
+		"foo": "bar"
 	},
 	"import": {
 		"foo.json":""

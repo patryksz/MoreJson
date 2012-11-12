@@ -11,7 +11,7 @@ class Parameters implements PluginInterface {
 	 *
 	 * @var array
 	 */
-	private $_parameters;
+	private $parameters;
 
 	/**
 	 * Initialize parameters and include parameters in json
@@ -24,13 +24,13 @@ class Parameters implements PluginInterface {
 		$input = $params['content'];
 		$parameters = $params['parameters'];
 
-		$this->_parameters = array_merge((array) $input['parameters'], $parameters);
-		array_walk_recursive($input, array($this, '_replaceParameters'));
-		$input['parameters'] = $this->_parameters;
+		$this->parameters = array_merge((array) $input['parameters'], $parameters);
+		array_walk_recursive($input, array($this, 'replaceParameters'));
+		$input['parameters'] = $this->parameters;
 
 		return array(
 			"content" => $input,
-			"parameters" => $this->_parameters
+			"parameters" => $this->parameters
 		);
 	}
 
@@ -40,9 +40,9 @@ class Parameters implements PluginInterface {
 	 * @param string $item
 	 * @param string $key
 	 */
-	private function _replaceParameters(&$item, $key){
-		if (!empty($this->_parameters[$item])) {
-			$item = $this->_parameters[$item];
+	private function replaceParameters(&$item, $key){
+		if (!empty($this->parameters[substr($item, 1)])) {
+			$item = $this->parameters[substr($item, 1)];
 		}
 	}
 }

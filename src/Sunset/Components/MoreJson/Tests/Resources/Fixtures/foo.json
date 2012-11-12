@@ -1,6 +1,6 @@
 {
 	"parameters":{
-		"$test":"test"
+		"test":"test"
 	},
 	"foo": "$foo",
 	"testing": "$test"

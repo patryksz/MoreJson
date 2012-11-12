@@ -1,5 +1,6 @@
 <?php
 namespace Sunset\Components\MoreJson;
+use Sunset\Components\MoreJson\Exception\MoreJsonException;
 
 /**
  * MoreJson is a simple library, which can help you including json to json and use parameters. It's great idea for configuration your system.
@@ -28,7 +29,7 @@ class MoreJson {
 	private $params;
 
 	/**
-
+	 * @param array $parameters
 	 */
 	public function __construct($parameters = array()) {
 		$this->params = array(

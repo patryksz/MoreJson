@@ -1,6 +1,5 @@
 <?php
-namespace Sunset\Components\MoreJson;
+namespace Sunset\Components\MoreJson\Exception;
 
 class MoreJsonException extends \Exception {
-
 }
