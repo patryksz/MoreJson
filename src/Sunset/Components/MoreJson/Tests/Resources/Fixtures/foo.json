@@ -1,0 +1,7 @@
+{
+	"parameters":{
+		"test":"test"
+	},
+	"foo": "$foo",
+	"testing": "$test"
+}

@@ -1,0 +1,10 @@
+{
+	"parameters": {
+		"username": "abdulklara",
+		"foo": "bar"
+	},
+	"import": {
+		"foo.json":""
+	},
+	"login": "$username"
+}
