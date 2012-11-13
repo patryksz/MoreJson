@@ -30,16 +30,18 @@ class MoreJson {
 
 	/**
 	 * @param array $parameters
+	 * @param array $plugins
 	 */
-	public function __construct($parameters = array()) {
+	public function __construct($parameters = array(), $plugins = array()) {
 		$this->params = array(
 			'path' => null,
 			'content' => null,
 			'parameters' => $parameters
 		);
+		$this->plugins = $plugins;
 
 		$this->availablePlugins = array(
-			'parameters', 'import'
+			'Parameters', 'Import', 'MagicConstants', 'Methods'
 		);
 	}
 
@@ -51,6 +53,7 @@ class MoreJson {
 	public function parse($fileName) {
 		$this->params['path'] = $fileName;
 		$this->params['content'] = $this->getFileContent();
+		$this->registerPlugins();
 		$this->usePlugins();
 
 		return $this->params['content'];
@@ -69,17 +72,22 @@ class MoreJson {
 		throw new MoreJsonException('Can\'t find file '.$this->params['path']);
 	}
 
+	private function registerPlugins() {
+		if (empty($this->plugins)) {
+			foreach ($this->availablePlugins as $plugin) {
+				$this->plugins[] = $this->getPlugin($plugin);
+			}
+		}
+	}
+
 	/**
 	 * Lets iterate and include all needed plugins
 	 */
 	private function usePlugins() {
-		foreach ((array)$this->params['content'] as $key => $value) {
-			if (in_array(strtolower($key), $this->availablePlugins)) {
-				$this->plugins[$key] = $this->getPlugin($key);
-				$pluginReturn = $this->plugins[$key]->run($this->params);
-				$this->params['content'] = $pluginReturn['content'];
-				$this->params['parameters'] = $pluginReturn['parameters'];
-			}
+		foreach($this->plugins as $plugin) {
+			$pluginReturn = $plugin->run($this->params);
+			$this->params['content'] = $pluginReturn['content'];
+			$this->params['parameters'] = $pluginReturn['parameters'];
 		}
 	}
 

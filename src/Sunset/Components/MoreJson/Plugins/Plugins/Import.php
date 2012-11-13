@@ -20,10 +20,12 @@ class Import implements PluginInterface {
 		$parameters = $params['parameters'];
 		$path = $this->getPath($params);
 
-		foreach ((array)$input['import'] as $import => $value) {
-			$importPath = implode("/", array($path, $import));
-			$json = new MoreJson($parameters);
-			$input = array_merge((array)$input, (array)$json->parse($importPath));
+		if (!empty($input['import'])) {
+			foreach ((array)$input['import'] as $import => $value) {
+				$importPath = implode("/", array($path, $import));
+				$json = new MoreJson($parameters);
+				$input = array_merge((array)$input, (array)$json->parse($importPath));
+			}
 		}
 		unset($input['import']);
 		return array(

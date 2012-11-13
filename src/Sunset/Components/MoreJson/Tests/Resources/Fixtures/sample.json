@@ -1,7 +1,9 @@
 {
 	"parameters": {
 		"username": "abdulklara",
-		"foo": "bar"
+		"foo": "bar",
+		"dir": "~DIR",
+		"time": ">time:s,a"
 	},
 	"import": {
 		"foo.json":""
